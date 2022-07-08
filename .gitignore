@@ -77,3 +77,6 @@ stamp-*
 *.stamp
 *.stamp-*
 .Tpo
+
+# our output dir
+output/

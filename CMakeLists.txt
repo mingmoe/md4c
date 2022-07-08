@@ -57,3 +57,6 @@ include(GNUInstallDirs)
 
 add_subdirectory(src)
 add_subdirectory(md2html)
+
+# build for our shared library
+include("${CMAKE_CURRENT_SOURCE_DIR}/lib.cmake")
