@@ -3,7 +3,7 @@
 #include <sstream>
 
 
-#ifdef _MSV_VERSION
+#ifdef WIN32
     #define PORT_PUBLIC_API __declspec(dllexport)
 #else
     #define PORT_PUBLIC_API
