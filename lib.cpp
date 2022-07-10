@@ -4,9 +4,9 @@
 
 
 #ifdef WIN32
-    #define PORT_PUBLIC_API __declspec(dllexport)
+    #define EXPORT_PUBLIC_API __declspec(dllexport)
 #else
-    #define PORT_PUBLIC_API
+    #define EXPORT_PUBLIC_API
 #endif
 
 namespace{
@@ -20,7 +20,7 @@ namespace{
 }
 
 extern "C" {
-PORT_PUBLIC_API int md4c_csharp_to_html(
+    EXPORT_PUBLIC_API int md4c_csharp_to_html(
     const char* text,
     unsigned size,
     int parse_flags,
@@ -36,5 +36,9 @@ PORT_PUBLIC_API int md4c_csharp_to_html(
         callback(str.c_str(),str.size());
 
         return result;
+    }
+
+    EXPORT_PUBLIC_API int md4c_csharp_get_version(){
+        return MD4CSHARP_VERSION;
     }
 }
