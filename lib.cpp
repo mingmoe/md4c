@@ -11,11 +11,9 @@
 
 namespace{
     void append(const char* text,MD_SIZE size,void* ptr){
-        auto os = reinterpret_cast<std::ostringstream*>(ptr);
+        auto func = reinterpret_cast<void(*)(const char* text,unsigned int size)>(ptr);
 
-        std::string_view view{text,size};
-
-        (*os) << view;
+        func(text,size);
     }
 }
 
@@ -25,15 +23,8 @@ extern "C" {
     unsigned size,
     int parse_flags,
     int render_flags,
-    void(*callback)(const char* text,unsigned long long size)){
-
-        std::ostringstream strs{};
-
-        auto result = md_html(text,size,&append,&strs,parse_flags,render_flags);
-
-        auto str = strs.str();
-
-        callback(str.c_str(),str.size());
+    void(*callback)(const char* text,unsigned int size)){
+        auto result = md_html(text,size,&append,callback,parse_flags,render_flags);
 
         return result;
     }
